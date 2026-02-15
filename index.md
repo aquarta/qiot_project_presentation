@@ -14,11 +14,11 @@ Il sistema si basa su un'architettura a 4 livelli logici che garantisce flessibi
 
 ```mermaid
 graph TD
-    User((Ricercatore)) -->|1. Configura Esperimento| Web[Management Layer\n(React + Go)]
-    Web -->|2. Push Configurazione| App[Edge Layer\n(Android Gateway)]
-    App -->|3. Auto-Connect & Subscribe| Sensors[Sensors Layer\n(Movesense, ST, Custom)]
-    App -->|4. Parsing & Publish JSON| Broker[Transport Layer\n(EMQX)]
-    Broker -->|5. Rule Engine| DB[Storage Layer\n(InfluxDB)]
+    User((Ricercatore)) -->|1. Configura Esperimento| Web[Management Layer<br/>React + Go]
+    Web -->|2. Push Configurazione| App[Edge Layer<br/>Android Gateway]
+    App -->|3. Auto-Connect & Subscribe| Sensors[Sensors Layer<br/>Movesense, ST, Custom]
+    App -->|4. Parsing & Publish JSON| Broker[Transport Layer<br/>EMQX]
+    Broker -->|5. Rule Engine| DB[Storage Layer<br/>InfluxDB]
     DB -.->|6. Query Dati| Web
 ```
 
