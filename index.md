@@ -1,9 +1,3 @@
-Ecco una bozza completa e strutturata in **Markdown**, ottimizzata per essere utilizzata come `README.md` principale o come pagina di documentazione su **GitHub Pages**.
-
-Ho organizzato il contenuto per mettere in risalto i punti di forza tecnici (Go, Edge Computing, Protocolli proprietari) e l'architettura a microservizi, utilizzando le informazioni estratte dalla tua relazione e dai documenti tecnici.
-
-***
-
 # 📡 Q-IoT Platform
 ### Ecosistema IoT End-to-End per la Raccolta Dati da Sensori BLE Eterogenei
 
