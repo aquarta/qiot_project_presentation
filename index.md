@@ -12,19 +12,11 @@ A differenza delle app verticali (che spesso limitano il numero di connessioni o
 
 Il sistema si basa su un'architettura a 4 livelli logici che garantisce flessibilità e scalabilità:
 
-```mermaid
-graph TD
-    User((Ricercatore)) -->|1. Configura Esperimento| Web[Management Layer<br/>React + Go]
-    Web -->|2. Push Configurazione| App[Edge Layer<br/>Android Gateway]
-    App -->|3. Auto-Connect & Subscribe| Sensors[Sensors Layer<br/>Movesense, ST, Custom]
-    App -->|4. Parsing & Publish JSON| Broker[Transport Layer<br/>EMQX]
-    Broker -->|5. Rule Engine| DB[Storage Layer<br/>InfluxDB]
-    DB -.->|6. Query Dati| Web
-```
+<img src="./assets/architecture.png" alt="Architettura Q-IoT" width="600"/>
 
 ### 1. Management Layer (Control Plane)
-*   **Frontend (React 19 + ECharts):** Dashboard intuitiva per la creazione di esperimenti tramite *drag & drop* dei sensori. Visualizza i dati in real-time.
-*   **Backend (Go 1.25):** Microservizio *schema-less* basato su "Mappe Dinamiche". Gestisce le configurazioni senza richiedere modifiche al database per ogni nuovo sensore aggiunto.
+Il backend (**Go**) funge da configuratore:
+<img src="./assets/configuration.png">
 
 ### 2. Edge Layer (Android Gateway)
 L'applicazione mobile (**Kotlin**) funge da gateway intelligente:
@@ -36,7 +28,15 @@ L'applicazione mobile (**Kotlin**) funge da gateway intelligente:
 *   **Broker (EMQX 5.x):** Gestisce la trasmissione asincrona via MQTT, disaccoppiando i dispositivi dal server.
 *   **Database (InfluxDB v2):** Storicizza le serie temporali ad alta frequenza (es. IMU a 50Hz/100Hz).
 
+| EMQX Dashboard | InfluxDB Dashboard |
+|---|---|
+| <img src="./assets/dashboard_emqx.png" width="300"/> | <img src="./assets/dashboard_influx.png" width="300"/> |
 ---
+
+### 4. Management Layer (Dashboards)
+La webapp oltre che configurare ci permette di visualizzare i dati in tempo reale con grafici interattivi (Apache ECharts):
+
+<img src="assets/dashboard.png" alt="Dashboard" width="600"/>
 
 ## 🚀 Key Features
 
@@ -68,12 +68,12 @@ Il sistema astrae la complessità delle chiamate REST-like (GET, PUT, SUBSCRIBE)
 
 | Componente | Tecnologia | Versione | Dettagli |
 | :--- | :--- | :--- | :--- |
-| **Mobile App** | Kotlin / Android SDK | 35 (Min 29) | Coroutines, MDS Lib 3.33.1 |
-| **Backend** | Go (Golang) | 1.25+ | Goroutines, High Concurrency |
-| **Frontend** | React | 19.x | Apache ECharts integration |
-| **Broker** | EMQX | 5.10 | MQTT 5.0, Rule Engine |
-| **Database** | InfluxDB | v2.7 (OSS) | Flux Query Language |
-| **Deploy** | Docker Compose | - | Containerized Infrastructure |
+| 📱 **Mobile App** | Kotlin / Android SDK | 35 (Min 29) | Coroutines, MDS Lib 3.33.1 |
+| 🖥️ **Backend** | Go (Golang) | 1.25+ | Goroutines, High Concurrency |
+| 🎨 **Frontend** | React | 19.x | Apache ECharts integration |
+| 🔄 **Broker** | EMQX | 5.10 | MQTT 5.0, Rule Engine |
+| 📊 **Database** | InfluxDB | v2.7 (OSS) | Flux Query Language |
+| 🐳 **Deploy** | Docker Compose | - | Containerized Infrastructure |
 
 ---
 
